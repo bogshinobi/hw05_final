@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
-from posts.models import Group, Post
+from posts.models import Comment, Group, Post
 
 TEMP_MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 
@@ -126,3 +126,25 @@ class PostFormTest(TestCase):
         self.check_post(
             Post.objects.filter(id=self.post.id).first(), form_data
         )
+
+    def test_add_comment(self):
+        """Проверка формы создания комментария"""
+        comments_count = Comment.objects.count()
+        form_data = {
+            'text': 'Тестовый коммент',
+        }
+        response = self.authorized_client.post(
+            reverse('posts:add_comment', kwargs={'post_id': self.post.id}),
+            data=form_data,
+            follow=True
+        )
+        self.assertRedirects(
+            response, reverse(
+                'posts:post_detail', kwargs={'post_id': self.post.id}
+            )
+        )
+        self.assertEqual(Comment.objects.count(), comments_count + 1)
+        comment = Comment.objects.latest('id')
+        self.assertEqual(comment.post.id, self.post.id)
+        self.assertEqual(comment.author, self.user)
+        self.assertEqual(comment.text, form_data['text'])

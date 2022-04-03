@@ -5,7 +5,7 @@
   <div class="container py-5">
     <h1>Последние обновления на сайте</h1>
     <article>
-      {% include 'posts/includes/switcher.html' %}
+      {% include 'posts/includes/switcher.html' with index=True%}
       {% load cache %}
       {% cache 20 index page %}
       {% for post in page_obj %}

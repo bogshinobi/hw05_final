@@ -183,8 +183,8 @@ class PostsPagesTests(TestCase):
         self.assertEqual(comments_count, Comment.objects.count() - 1)
         self.assertIn(new_comment, response.context.get('comments'))
 
-    def test_follow_and_unfollow(self):
-        """Пользователь может подписаться/Подписчик может отписаться"""
+    def test_follow(self):
+        """Пользователь может подписаться"""
         response = self.new_authorized_client.get(reverse(
             'posts:profile_follow',
             kwargs={'username': self.user.username}
@@ -193,6 +193,9 @@ class PostsPagesTests(TestCase):
         self.assertTrue(Follow.objects.filter(
             user=self.new_user, author=self.user
         ).exists())
+
+    def test_unfollow(self):
+        """Подписчик может отписаться"""
         response = self.new_authorized_client.get(reverse(
             'posts:profile_unfollow',
             kwargs={'username': self.user.username}
