@@ -1,8 +1,9 @@
 from io import BytesIO
 
-import pytest
 from django import forms
 from django.core.files.base import File
+
+import pytest
 from PIL import Image
 from posts.models import Post
 
