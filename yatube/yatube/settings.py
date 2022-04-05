@@ -7,13 +7,15 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 SECRET_KEY = 'qu@&b#5rm#6*(14i1w^9u#0no=6!k!+ioem*odv6q^n%fe_@bt'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     '[::1]',
     'testserver',
+    'www.ktbmad.pythonanywhere.com',
+    'ktbmad.pythonanywhere.com',
 ]
 
 INSTALLED_APPS = [
@@ -27,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'sorl.thumbnail',
 ]
 
@@ -44,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'yatube.urls'
@@ -113,3 +117,7 @@ EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
 POST_PER_PAGE = 10
 
 CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+] 
