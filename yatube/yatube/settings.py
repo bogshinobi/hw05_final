@@ -7,7 +7,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 SECRET_KEY = 'qu@&b#5rm#6*(14i1w^9u#0no=6!k!+ioem*odv6q^n%fe_@bt'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -104,6 +104,7 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'posts:index'
