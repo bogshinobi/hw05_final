@@ -21,7 +21,7 @@ if settings.DEBUG:
         settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
     )
     urlpatterns += static(
-        settings.STATIC_URL, document_root=settings.STATICFILES_DIRS
+        settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0]
     )
     urlpatterns += (path('__debug__/', include(debug_toolbar.urls)),)
 
